@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import AppLayout from '../components/layout/AppLayout'
+import ProtectedRoute from '../components/auth/ProtectedRoute'
 import Dashboard from '../pages/Dashboard'
 import LoginPage from '../pages/LoginPage'
 import NotesPage from '../pages/NotesPage'
@@ -11,6 +12,7 @@ import TagsPage from '../pages/TagsPage'
 import NewTagPage from '../pages/NewTagPage'
 import FavoritesPage from '../pages/FavoritesPage'
 import UsersPage from '../pages/UsersPage'
+import SearchResultsPage from '../pages/SearchResultsPage'
 
 const router = createBrowserRouter([
   {
@@ -19,7 +21,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: <AppLayout />,
+    element: (
+      <ProtectedRoute>
+        <AppLayout />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, element: <Dashboard /> },
       { path: 'notes', element: <NotesPage /> },
@@ -30,7 +36,8 @@ const router = createBrowserRouter([
       { path: 'tags', element: <TagsPage /> },
       { path: 'tags/new', element: <NewTagPage /> },
       { path: 'favorites', element: <FavoritesPage /> },
-      { path: 'users', element: <UsersPage /> }
+      { path: 'users', element: <UsersPage /> },
+      { path: 'search', element: <SearchResultsPage /> }
     ]
   }
 ])

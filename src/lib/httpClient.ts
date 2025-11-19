@@ -31,7 +31,15 @@ httpClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      console.warn('Yetkisiz istek - tekrar oturum açılması gerekiyor.')
+      // 401 hatası geldiğinde token'ı temizle ve login sayfasına yönlendir
+      const token = localStorage.getItem('accessToken')
+      if (token) {
+        localStorage.removeItem('accessToken')
+        // Sadece zaten login sayfasında değilsek yönlendir
+        if (window.location.pathname !== '/auth/sign-in') {
+          window.location.href = '/auth/sign-in'
+        }
+      }
     }
     return Promise.reject(error)
   }

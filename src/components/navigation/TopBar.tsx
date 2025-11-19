@@ -7,6 +7,7 @@ import { useNoteSearch } from '../../hooks/useNoteSearch'
 import type { NoteSummary, UserProfile } from '../../types'
 import { formatRelative } from '../../utils/dates'
 import { changePassword, userQueries } from '../../services/userService'
+import { logout } from '../../services/authService'
 
 const avatarUrl =
   'https://lh3.googleusercontent.com/aida-public/AB6AXuDV7ZsHu4U75QXwF2UZYwQKyB_jbSKvo09HnGXrB4qWYjLiF5JLrux0-8CjP6NsyvD3WicpbZcusoZ_taibNdslfEwnWLCr0IOWL1Vshy17zhkP6ORyngDRhI6X1nP5MPEByRYI1seOtjkz2Qzb8yT0LlFxXZGco52Qd0fqDEZE04J7oxExuXhfGz19otKSx6xkvo8cG7jJn_qxXDqBIt9jDVsECvTqh8sOimAQiRzoRsH6f3oC5KzPyKj_C-9JlsjSYwq1T0JsITE'
@@ -48,14 +49,19 @@ const TopBar = () => {
 
   const profileMutation = useMutation({
     mutationFn: changePassword,
-    onSuccess: () => {
-      setProfileFeedback('Password updated successfully.')
-      setProfileForm({
-        currentPassword: '',
-        newPassword: '',
-        confirmPassword: ''
-      })
-      setTimeout(() => setProfileFeedback(null), 2500)
+    onSuccess: async () => {
+      setProfileFeedback('Password updated successfully. You will be logged out...')
+      // Şifre değiştirildikten sonra logout yap ve login sayfasına yönlendir
+      try {
+        await logout()
+      } catch (error) {
+        // Logout hatası olsa bile devam et
+        console.error('Logout error:', error)
+      } finally {
+        localStorage.removeItem('accessToken')
+        setIsProfileOpen(false)
+        navigate('/auth/sign-in', { replace: true })
+      }
     },
     onError: (error: any) => {
       const message =

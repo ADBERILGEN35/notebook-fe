@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/auth.css'
 import { login, register } from '../services/authService'
@@ -17,6 +17,14 @@ const LoginPage = () => {
   const [error, setError] = useState<string | null>(null)
 
   const isSignIn = mode === 'signin'
+
+  // Zaten giriş yapılmışsa dashboard'a yönlendir
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken')
+    if (token) {
+      navigate('/', { replace: true })
+    }
+  }, [navigate])
 
   const resetMessages = () => {
     setMessage(null)
