@@ -1,0 +1,26 @@
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #050914;
+}
+
+.app-shell__content {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  flex: 1;
+}
+
+.app-shell__main {
+  padding: 2rem;
+  background-color: #0d121b;
+  color: #f8fafc;
+  min-height: 100%;
+}
+
+@media (max-width: 960px) {
+  .app-shell__content {
+    grid-template-columns: 1fr;
+  }
+}
+

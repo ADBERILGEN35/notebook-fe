@@ -1,0 +1,203 @@
+.note-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #f8fafc;
+}
+
+.note-editor__crumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(148, 163, 184, 0.85);
+  font-size: 0.95rem;
+}
+
+.note-editor__crumbs a {
+  color: #7db3ff;
+  text-decoration: none;
+}
+
+.note-editor__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 1.5rem;
+}
+
+.note-editor__main {
+  background: #0d121b;
+  border: 1px solid rgba(35, 47, 72, 0.85);
+  border-radius: 20px;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.note-editor__title {
+  border: none;
+  font-size: 2.4rem;
+  font-weight: 600;
+  background: transparent;
+  color: inherit;
+  outline: none;
+}
+
+.note-editor__main textarea {
+  min-height: 360px;
+  border-radius: 18px;
+  border: 1px solid rgba(35, 47, 72, 0.85);
+  background: rgba(15, 22, 34, 0.8);
+  color: inherit;
+  padding: 1.25rem;
+  font-size: 1.05rem;
+  resize: vertical;
+  outline: none;
+}
+
+.note-editor__sidebar {
+  background: #0d121b;
+  border: 1px solid rgba(35, 47, 72, 0.85);
+  border-radius: 20px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.note-editor__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.note-editor__actions .ghost,
+.note-editor__actions .primary {
+  border-radius: 12px;
+  border: none;
+  padding: 0.55rem 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.note-editor__actions .ghost {
+  background: rgba(148, 163, 184, 0.15);
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.note-editor__actions .primary {
+  background: linear-gradient(135deg, #135bec, #4a90e2);
+  color: white;
+}
+
+.note-editor__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.note-editor__field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.note-editor__select,
+.note-editor__input {
+  border-radius: 14px;
+  border: 1px solid rgba(35, 47, 72, 0.85);
+  background: rgba(15, 22, 34, 0.75);
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: inherit;
+}
+
+.note-editor__input input {
+  border: none;
+  background: transparent;
+  color: inherit;
+  flex: 1;
+  outline: none;
+}
+
+.note-editor__select select {
+  border: none;
+  background: transparent;
+  color: inherit;
+  flex: 1;
+  outline: none;
+  appearance: none;
+  font-size: 0.95rem;
+}
+
+.note-editor__select select,
+.note-editor__select select option {
+  background-color: #050914;
+  color: #f8fafc;
+}
+
+.note-editor__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-height: 40px;
+}
+
+.note-editor__tags .tag-chip {
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.25);
+  color: #93c5fd;
+  padding: 0.15rem 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.note-editor__tags .tag-chip.is-active {
+  background: rgba(59, 130, 246, 0.45);
+  color: #fff;
+}
+
+.note-editor__muted {
+  color: rgba(148, 163, 184, 0.85);
+  font-size: 0.9rem;
+}
+
+.note-editor__feedback {
+  color: #7dd3fc;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.note-editor__details {
+  border-top: 1px solid rgba(35, 47, 72, 0.85);
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.note-editor__details p {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.note-editor__details span {
+  color: rgba(148, 163, 184, 0.8);
+}
+
+.note-editor__details strong {
+  color: inherit;
+  font-weight: 600;
+}
+
+@media (max-width: 960px) {
+  .note-editor__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
