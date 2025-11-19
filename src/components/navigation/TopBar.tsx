@@ -36,6 +36,9 @@ const TopBar = () => {
     newPassword: '',
     confirmPassword: ''
   })
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   useEffect(() => {
     if (profile) {
@@ -44,6 +47,9 @@ const TopBar = () => {
         newPassword: '',
         confirmPassword: ''
       })
+      setShowCurrentPassword(false)
+      setShowNewPassword(false)
+      setShowConfirmPassword(false)
     }
   }, [profile])
 
@@ -246,40 +252,82 @@ const TopBar = () => {
                   </div>
                 </label>
 
-                <label className="profile-modal__field">
+                <label className="profile-modal__field profile-modal__field--password">
                   <span>Current password</span>
-                  <input
-                    type="password"
-                    value={profileForm.currentPassword}
-                    onChange={(event) =>
-                      setProfileForm((prev) => ({ ...prev, currentPassword: event.target.value }))
-                    }
-                    placeholder="Enter current password"
-                  />
+                  <div style={{ position: 'relative' }}>
+                    <input
+                      type={showCurrentPassword ? 'text' : 'password'}
+                      value={profileForm.currentPassword}
+                      onChange={(event) =>
+                        setProfileForm((prev) => ({ ...prev, currentPassword: event.target.value }))
+                      }
+                      placeholder="Enter current password"
+                    />
+                    <button
+                      type="button"
+                      className="profile-modal__password-toggle"
+                      aria-label={showCurrentPassword ? 'Hide password' : 'Show password'}
+                      onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                    >
+                      {showCurrentPassword ? (
+                        <span className="material-symbols-outlined">visibility_off</span>
+                      ) : (
+                        <span className="material-symbols-outlined">visibility</span>
+                      )}
+                    </button>
+                  </div>
                 </label>
 
-                <label className="profile-modal__field">
+                <label className="profile-modal__field profile-modal__field--password">
                   <span>New password</span>
-                  <input
-                    type="password"
-                    value={profileForm.newPassword}
-                    onChange={(event) =>
-                      setProfileForm((prev) => ({ ...prev, newPassword: event.target.value }))
-                    }
-                    placeholder="Enter new password"
-                  />
+                  <div style={{ position: 'relative' }}>
+                    <input
+                      type={showNewPassword ? 'text' : 'password'}
+                      value={profileForm.newPassword}
+                      onChange={(event) =>
+                        setProfileForm((prev) => ({ ...prev, newPassword: event.target.value }))
+                      }
+                      placeholder="Enter new password"
+                    />
+                    <button
+                      type="button"
+                      className="profile-modal__password-toggle"
+                      aria-label={showNewPassword ? 'Hide password' : 'Show password'}
+                      onClick={() => setShowNewPassword(!showNewPassword)}
+                    >
+                      {showNewPassword ? (
+                        <span className="material-symbols-outlined">visibility_off</span>
+                      ) : (
+                        <span className="material-symbols-outlined">visibility</span>
+                      )}
+                    </button>
+                  </div>
                 </label>
 
-                <label className="profile-modal__field">
+                <label className="profile-modal__field profile-modal__field--password">
                   <span>Confirm new password</span>
-                  <input
-                    type="password"
-                    value={profileForm.confirmPassword}
-                    onChange={(event) =>
-                      setProfileForm((prev) => ({ ...prev, confirmPassword: event.target.value }))
-                    }
-                    placeholder="Re-enter new password"
-                  />
+                  <div style={{ position: 'relative' }}>
+                    <input
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      value={profileForm.confirmPassword}
+                      onChange={(event) =>
+                        setProfileForm((prev) => ({ ...prev, confirmPassword: event.target.value }))
+                      }
+                      placeholder="Re-enter new password"
+                    />
+                    <button
+                      type="button"
+                      className="profile-modal__password-toggle"
+                      aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    >
+                      {showConfirmPassword ? (
+                        <span className="material-symbols-outlined">visibility_off</span>
+                      ) : (
+                        <span className="material-symbols-outlined">visibility</span>
+                      )}
+                    </button>
+                  </div>
                 </label>
 
                 {profileFeedback && (

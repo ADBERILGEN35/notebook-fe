@@ -15,6 +15,8 @@ const LoginPage = () => {
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false)
 
   const isSignIn = mode === 'signin'
 
@@ -147,7 +149,7 @@ const LoginPage = () => {
                   <label htmlFor="password">Password</label>
                   <input
                     id="password"
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     placeholder="••••••••"
                     autoComplete={isSignIn ? 'current-password' : 'new-password'}
                     minLength={8}
@@ -158,9 +160,14 @@ const LoginPage = () => {
                   <button
                     type="button"
                     className="auth-field__toggle"
-                    aria-label="Show or hide password"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    onClick={() => setShowPassword(!showPassword)}
                   >
-                    👁️
+                    {showPassword ? (
+                      <span className="material-symbols-outlined">visibility_off</span>
+                    ) : (
+                      <span className="material-symbols-outlined">visibility</span>
+                    )}
                   </button>
                 </div>
 
@@ -169,7 +176,7 @@ const LoginPage = () => {
                     <label htmlFor="password-confirm">Confirm Password</label>
                     <input
                       id="password-confirm"
-                      type="password"
+                      type={showPasswordConfirm ? 'text' : 'password'}
                       placeholder="••••••••"
                       autoComplete="new-password"
                       minLength={8}
@@ -177,6 +184,18 @@ const LoginPage = () => {
                       value={passwordConfirm}
                       onChange={(e) => setPasswordConfirm(e.target.value)}
                     />
+                    <button
+                      type="button"
+                      className="auth-field__toggle"
+                      aria-label={showPasswordConfirm ? 'Hide password' : 'Show password'}
+                      onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+                    >
+                      {showPasswordConfirm ? (
+                        <span className="material-symbols-outlined">visibility_off</span>
+                      ) : (
+                        <span className="material-symbols-outlined">visibility</span>
+                      )}
+                    </button>
                   </div>
                 )}
 
