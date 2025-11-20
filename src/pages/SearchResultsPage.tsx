@@ -73,7 +73,7 @@ const SearchResultsPage = () => {
     isError
   } = useQuery({
     ...notesQueries.search(searchPayload),
-    enabled: Boolean(query.trim().length > 0)
+    enabled: Boolean(query.trim().length >= 3)
   })
 
   const results = useMemo<NoteSummary[]>(() => data?.content ?? [], [data])
@@ -105,18 +105,25 @@ const SearchResultsPage = () => {
         </div>
       )}
 
-      {query.trim() && isLoading && (
+      {query.trim() && query.trim().length < 3 && (
+        <div className="dashboard__empty">
+          <span className="material-symbols-outlined">search_off</span>
+          <p>Please enter at least 3 characters to search.</p>
+        </div>
+      )}
+
+      {query.trim().length >= 3 && isLoading && (
         <p className="dashboard__muted">Searching for "{query}"…</p>
       )}
 
-      {query.trim() && isError && (
+      {query.trim().length >= 3 && isError && (
         <div className="dashboard__empty">
           <span className="material-symbols-outlined">error_outline</span>
           <p>Could not search notes. Please try again.</p>
         </div>
       )}
 
-      {query.trim() && !isLoading && !isError && totalResults === 0 && (
+      {query.trim().length >= 3 && !isLoading && !isError && totalResults === 0 && (
         <div className="dashboard__empty">
           <span className="material-symbols-outlined">search_off</span>
           <p>No matching notes found for "{query}".</p>

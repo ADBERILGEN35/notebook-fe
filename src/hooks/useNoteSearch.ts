@@ -22,7 +22,7 @@ export const useNoteSearch = (initialQuery = '') => {
 
   const query = useQuery({
     ...notesQueries.search(effectiveParams),
-    enabled: Boolean(effectiveParams.q && effectiveParams.q.trim().length > 0),
+    enabled: Boolean(effectiveParams.q && effectiveParams.q.trim().length >= 3),
     staleTime: 1000 * 30
   })
 

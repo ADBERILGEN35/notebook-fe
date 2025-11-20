@@ -81,8 +81,9 @@ const TopBar = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    if (!query.trim()) return
-    navigate(`/search?q=${encodeURIComponent(query.trim())}`)
+    const trimmedQuery = query.trim()
+    if (!trimmedQuery || trimmedQuery.length < 3) return
+    navigate(`/search?q=${encodeURIComponent(trimmedQuery)}`)
     setIsFocused(false)
   }
 
@@ -131,14 +132,19 @@ const TopBar = () => {
 
         {isFocused && query.trim().length > 0 && (
           <div className="topnav__search-results">
-            {searchQuery.isLoading && <p className="topnav__search-state">Searching…</p>}
-            {searchQuery.isError && (
+            {query.trim().length < 3 && (
+              <p className="topnav__search-state">Please enter at least 3 characters to search.</p>
+            )}
+            {query.trim().length >= 3 && searchQuery.isLoading && (
+              <p className="topnav__search-state">Searching…</p>
+            )}
+            {query.trim().length >= 3 && searchQuery.isError && (
               <p className="topnav__search-state error">Could not search notes. Try again.</p>
             )}
-            {!searchQuery.isLoading && !searchQuery.isError && results.length === 0 && (
+            {query.trim().length >= 3 && !searchQuery.isLoading && !searchQuery.isError && results.length === 0 && (
               <p className="topnav__search-state">No matching notes found.</p>
             )}
-            {!searchQuery.isLoading && !searchQuery.isError && results.length > 0 && (
+            {query.trim().length >= 3 && !searchQuery.isLoading && !searchQuery.isError && results.length > 0 && (
               <ul>
                 {results.map((note) => (
                   <li key={note.id} onClick={() => handleResultClick(note.id)}>

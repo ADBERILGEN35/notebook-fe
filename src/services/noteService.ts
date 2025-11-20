@@ -160,7 +160,7 @@ export const notesQueries = {
   search: (payload?: SearchNotesPayload) => ({
     queryKey: [...queryKeys.notes, 'search', payload ?? {}],
     queryFn: () => searchNotes(payload ?? {}),
-    enabled: Boolean(payload?.q && payload.q.trim().length > 0)
+    enabled: Boolean(payload?.q && payload.q.trim().length >= 3)
   })
 }
 
