@@ -17,7 +17,7 @@ export interface RegisterPayload {
 }
 
 export const login = async (payload: LoginPayload) => {
-  const { data } = await httpClient.post<LoginResponse>('/auth/login', payload)
+  const { data } = await httpClient.post<LoginResponse>('/v1/auth/login', payload)
   return data
 }
 
@@ -27,6 +27,5 @@ export const register = async (payload: RegisterPayload) => {
 }
 
 export const logout = async () => {
-  await httpClient.post('/auth/logout')
+  await httpClient.post('/v1/auth/logout')
 }
-
